@@ -40,13 +40,16 @@ type Props = {};
       <View style={styles.container}>
       <ImageBackground
             source={require('../assets/day_background.png')}
-            style={styles.container}s>
+            style={styles.container}>
         {
           !this.props.store.loading ? 
           <View>
             <View >
               <Text style={styles.time}>{this.time}</Text>
-              <Text style={styles.location}>{this.props.store.weatherData.name}</Text>
+              <View style={styles.location}>
+              <Image source={require('../assets/ic_map.png')} style={{width: 16, height: 16, margin: 5}}/>
+                <Text style={styles.locationText}>{this.props.store.weatherData.name}</Text>
+              </View>
             </View>
             <View style={styles.main_content}>
               <Text style={styles.heading}>{this.props.store.weatherData.main.temp}°c</Text>
@@ -55,6 +58,13 @@ type Props = {};
                style={{width: 80, height: 80}} />
                 <Text style={styles.description}>{this.props.store.weatherData.weather[0].main}</Text>
               </View>
+            </View>
+            <View style={styles.details}>
+              <Text style={styles.details}> Details</Text>
+              <Text style={styles.description}> Pressure: {this.props.store.weatherData.main.pressure}</Text>
+              <Text style={styles.description}> Humidity: {this.props.store.weatherData.main.humidity}</Text>
+              <Text style={styles.description}> Min temperature: {this.props.store.weatherData.main.temp_min}</Text>
+              <Text style={styles.description}> Max temperature: {this.props.store.weatherData.main.temp_max}</Text>
             </View>
           </View>
         :
@@ -76,17 +86,22 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
   },
   heading: {
-    fontSize: 60,
+    fontSize: 65,
     color: '#fff',
     fontFamily: 'MerriweatherSans-Regular',
     marginLeft: 40
   },
-  location: {
+  locationText: {
+    marginLeft: 2,
     color: '#fff',
     fontSize: 20, 
+    fontFamily: 'MerriweatherSans-Regular'
+  },
+  location: {
+    display: 'flex',
+    flexDirection: 'row',
     marginTop: 20,
     marginLeft: 40,
-    fontFamily: 'MerriweatherSans-Regular'
   },
   description: {
     textAlign : 'center',
@@ -111,15 +126,34 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     marginRight: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
+
   },
   description:{
     fontSize: 12,
     fontFamily: 'MerriweatherSans-Regular',
-    color: '#fff'
+    color: '#fff',
+    textAlign: 'center'
   },
   activityIndicator:{
     flex : 1,
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
+  details:{
+    marginLeft: 20,
+    color: '#fff',
+    marginTop: 20,
+    fontFamily: 'MerriweatherSans-Bold',
+    fontSize: 15,
+    marginBottom: 5
+  },
+  description:{
+    margin: 3,
+    color: '#fff',
+    fontFamily: 'MerriweatherSans-Regular',
+    fontSize: 13,
+    marginLeft: 20,
+  },
 });
